@@ -263,7 +263,7 @@ console.log('Y1',memoizedY(5));
 console.log('Y2',memoizedY(5));
 console.log('Y3',memoizedY(10));
 
-//compose: allows to move use functions together and move around based on the user requirements. 
+//compose: small pieces to create something bigger. allows to move use functions together and move around based on the user requirements. 
 //nota: valor absoluto: remover el valor negativo ||
 const compose = (f,g) => (data) => f(g(data)); //will apply "g" first, which corresponds to makePositive in compose's order.
 const multiplyBy3 = (num) => num*3;
@@ -277,6 +277,148 @@ const makepositive = (num) => Math.abs(num);
 const multiplyBy3Absolute = pipe(multiplyBy3,makePositive);
 console.log(multiplyBy3Absolute(-200));
 //arity: is the quantity of arguments that a function receives. 
+
+//OOP: define what it is: properties, methods, inheritance w/ classes.
+//tight coupling / fragile base class problem : changes eventually may create issues where the code needs to be refactored or where the code repeats itself.
+
+//FP/Composition: define what it has: functions based on what it does and that may be easily reused. 
+
+//programming paradigms: writing certain code by following a certain set of rules. OOP - FP 
+
+//a program needs to be able to : allocate memory & parse and execute (Read and Run commands)
+//engine consists of memory heap (memory allocated) & call stack (where you are in the program)
+//memory leaks: unused memory that lingers around which fills up the memory heap
+//single threaded means it only has one call stack. why? no issues such as deadlocks. 
+//synchronous programming: gets executed in line. can get slow.
+//callstack overflow is when the call stack runs out of space (i.e w/ recursion: function self called)
+//asynchronous programming: allows to run a function while the program is still running. 
+//call stack (only until its done then it runs => web api, call back queue & the event loop). A setTimeout at 0s will only run after the call stack is completed, ie. 
+//promises: fetch function,ie. .then() / give a response based on a result. 
+//parallel promising: run all parallel; sequencial: depend on each other; race
+//async function functionName(){}
+//.finally() will be called after a promise is completed
+//job queue 
+//Promise.all() 
+//Promise.allSettled() 
+//Promise.any() : resolves if any of the supplied promises is resolved
+////parallel promising: run all parallel; sequencial: depend on each other; race
+const promisify = (item, delay) =>
+  new Promise((resolve) =>
+    setTimeout(() =>
+      resolve(item), delay));
+
+const a = () => promisify('a', 100);
+const b = () => promisify('b', 5000);
+const c = () => promisify('c', 3000);
+//all at the same time
+async function parallel() {
+  const promises = [a(), b(), c()];
+  const [output1, output2, output3] = await Promise.all(promises);
+  return `prallel is done: ${output1} ${output2} ${output3}`
+}
+//whichever is faster
+async function race() {
+  const promises = [a(), b(), c()];
+  const output1 = await Promise.race(promises);
+  return `race is done: ${output1}`;
+}
+//one after the other
+async function sequence() {
+  const output1 = await a();
+  const output2 = await b();
+  const output3 = await c();
+  return `sequence is done ${output1} ${output2} ${output3}`
+}
+
+sequence().then(console.log)
+parallel().then(console.log)
+race().then(console.log) //wins because its whoever resolves first
+
+//promise.any()
+const p1 = new Promise((resolve, reject) => {
+    setTimeout(() => resolve("A"), Math.floor(Math.random() * 1000));
+  });
+  const p2 = new Promise((resolve, reject) => {
+    setTimeout(() => resolve("B"), Math.floor(Math.random() * 1000));
+  });
+  const p3 = new Promise((resolve, reject) => {
+    setTimeout(() => resolve("C"), Math.floor(Math.random() * 1000));
+  });
+//Out of p1, p2 and p3, whichever resolves first is taken by Promise.any().
+  (async function () {
+    const result = await Promise.any([p1, p2, p3]);
+    console.log(result); // Prints "A", "B" or "C"
+  })();
+
+//node.js: web worker is a js program running on a different thread.
+//modules: pieces of code to make large applications. give us a better way to organize variables and functions. 
+//Math.floor makes the numb an integer. 
+
+var harry = 'potter'
+var voldemort = 'voldemort'
+function fight(char1, char2) {
+  var attack1 = Math.floor(Math.random() * char1.length);
+  var attack2 = Math.floor(Math.random() * char2.length);
+  return attack1 > attack2 ? `${char1} wins` : `${char2} wins`
+}
+console.log(fight(harry, voldemort)); 
+
+//global scrope => module scope => function scope => block scope - let and const
+//The Module pattern is used to mimic the concept of classes (since JavaScript doesn't natively support classes) 
+//so that we can store both public and private methods and variables inside a single object — 
+//similar to how classes are used in other programming languages like Java or Python.
+//revealing Module pattern (show only what you want to reveal to the public, ie, in html scripts)
+var fightModule = (function(){
+var harry = 'potter'
+var voldemort = 'voldemort'
+function fight(char1, char2) {
+  var attack1 = Math.floor(Math.random() * char1.length);
+  var attack2 = Math.floor(Math.random() * char2.length);
+  return attack1 > attack2 ? `${char1} wins` : `${char2} wins`
+}
+return{
+    fight: fight
+}
+})();
+//variables and function fight is no longer global scoped because they are inside a module (emulating classes)
+console.log(fightModule.fight('manu','manu2'));
+
+//ES6 Modules
+const harry3 = 'potter3'
+const voldemort3 = 'voldemort3'
+export default function fight2(char1, char2) {
+  var attack1 = Math.floor(Math.random() * char1.length);
+  var attack2 = Math.floor(Math.random() * char2.length);
+  return attack1 > attack2 ? `${char1} wins` : `${char2} wins`
+}
+console.log(fight2(harry3, voldemort3)); 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

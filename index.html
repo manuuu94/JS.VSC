@@ -7,6 +7,8 @@
     <title>Document</title>
 </head>
 <body>
+
+    
     <form action="">
 
         <input type="submit" value="Clic" onclick="test()">
@@ -14,8 +16,22 @@
 
     <button onclick="test()">click2</button>
 
+    <h1>Hello click to disappear</h1>
 
 </body>
 </html>
 
+<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
 <script src="Index2.js"></script>
+<script> var test = '1234'; </script>
+<script> 
+var script2 = (function(){
+    $('h1').click(function(){
+        $('h1').hide();
+    })
+})()    
+</script>
+<script type="module">
+    import fight2 from './Index3.js';
+    //console.log(fight2(harry3, voldemort3));
+</script>

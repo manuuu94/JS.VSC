@@ -9,6 +9,7 @@ const user = {
   const pipe = (f, g) => (...args) => g(f(...args))
   const purchaseItem  = (...fns) => fns.reduce(compose);
   const purchaseItem2  = (...fns) => fns.reduce(pipe);
+  
   //pipe
   purchaseItem2(
     addItemToCart,
