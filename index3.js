@@ -386,26 +386,79 @@ console.log(fightModule.fight('manu','manu2'));
 //ES6 Modules
 const harry3 = 'potter3'
 const voldemort3 = 'voldemort3'
-export default function fight2(char1, char2) {
+/*export default function fight2(char1, char2) {
   var attack1 = Math.floor(Math.random() * char1.length);
   var attack2 = Math.floor(Math.random() * char2.length);
   return attack1 > attack2 ? `${char1} wins` : `${char2} wins`
+}*/
+//console.log(fight2(harry3, voldemort3)); 
+
+//throw : stops the program with whatever is sent to the program. usually for catching an error
+//try catch : only for synchronouos code
+
+/* function tryCatch(){
+    try{
+        testing();
+    }catch{
+        throw 'test aprobado' //funciona
+    }
 }
-console.log(fight2(harry3, voldemort3)); 
+*/
+
+//console.log(tryCatch());
+
+Promise.resolve('asyncfail')
+    .then(response => {
+        console.log(response)
+        throw new Error('#1 fail')
+    })
+    .then(response => {
+        console.log(response)
+    })
+    .catch(err => {
+        console.error('error', err.message)
+    })
+    .then(response => {
+        console.log('hi am I still needed?', response)
+        return 'done'
+    })
+    .catch(err => {
+        console.error(err)
+        return 'failed'
+    });
+
+    //try catch with async function immediately invoked functions. can be used because of the await 
+    (async function() {
+        try {
+            await Promise.reject('oopsie')
+        } catch (err) {
+            console.error(err)
+        }
+    
+        console.log('This is still good!')
+    })();
 
 
 
+    (function () {
+        try {
+          throw new Error();
+        } catch (err) {
+          var err = 5;
+          var boo = 10;
+          console.log(err);
+        }
+        //Guess what the output is here:
+        console.log(err);
+        console.log(boo);
+      })();
 
+//Data Structures: code should be fast, readable and memory efficient
+//they are way to store information. 
+//DS: arrays,stacks,queues,linked lists,trees,tries,graphs,hash tables.
+//Algorithms: sorting, dynamic programming, bfs+dfs(searching),recursion
 
-
-
-
-
-
-
-
-
-
+//arrays (lists): lookup, push, insert, delete
 
 
 

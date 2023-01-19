@@ -1,3 +1,4 @@
+//FP
 const user = {
     name: 'Kim',
     active: true,
