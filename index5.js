@@ -66,7 +66,7 @@ function multiply(a,b){
     return a*b;
 }
 var total = multiply(4,5);
-alert(total);
+//alert(total);
 
 //arrays : way to organize information
 var list = ["num1","num2","num3","a"];
@@ -102,14 +102,36 @@ user.shout();
 
 //loops
 
+//for loops
+console.log("for loops");
+var listica = [1,2,3,4,5];
+for (item in listica){
+    console.log(listica[item]);
+}
 
+for(var i=0;i<listica.length;i++){
+    console.log(listica[i]);
+}
 
+//while loops
+var i = 0;
+console.log("while loop");
+while(i < listica.length){
+    console.log(listica[i]);
+    i++;
+}
 
+//forEach
+console.log("forEach loop");
+listica.forEach(function(i){
+    console.log(i);
+})
 
-
-
-
-
+console.log("forEach 2");
+function listica2(lista,i){
+    console.log(lista,i);
+}
+listica.forEach(listica2);
 
 
 

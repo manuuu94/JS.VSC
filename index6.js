@@ -1,3 +1,4 @@
+//small JS validator w/ for loop
 var database = [
     {
         username:"manu",
@@ -23,9 +24,18 @@ var newsFeed = [
 var userNamePrompt = prompt("Username?");
 var passwordPrompt = prompt("Password?");
 
+function isValidUser(user,pass){
+    for(var i=0;i<database.length;i++){
+        if(user === database[i].username &&
+            pass === database[i].password){
+                return true;
+            }
+    }
+    return false;
+}
+
 function signIn(user,pass){
-    if(user === database[0].username &&
-        pass === database[0].password){
+    if(isValidUser(user,pass)){
             console.log(newsFeed);
         }else{
             alert("Incorrect!");
@@ -33,4 +43,15 @@ function signIn(user,pass){
 }
 
 signIn(userNamePrompt,passwordPrompt);
+
+
+//JS Keywords: var, for, etc. Cant be used. Already reserved for JS processes
+
+
+
+
+
+
+
+
 
