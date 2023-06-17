@@ -2,7 +2,7 @@
 //JS is multiparadigm language (OOP & FP). 
 //Allows us to organize code in a more clear and understandable way. Easier to extend. Easier to maintain. Memory efficient. Dry. 
 const elf = {
-    name1: 'Orwell',
+    name1: 'Chucky',
     weapon: 'bow',
     attack(){
         return elf.name1+' attack with '+elf.weapon
